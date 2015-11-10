@@ -41,6 +41,7 @@ public class Description extends Activity
 
 
 		tvName.setText(list.get(pos).get("name").toString());
+		tvloc.setText(list.get(pos).get("location").toString());
 
 
 	}
