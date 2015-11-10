@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:id="@+id/framemain"
+			  android:layout_width="match_parent"
+			  android:layout_height="150dp"
+	android:padding="5dp"
+	android:elevation="5dp">
+
+	<ImageView
+		android:layout_width="match_parent"
+		android:layout_height="90dp"
+		android:id="@+id/imageViewmain"
+		android:background="#d3d3d3"
+		android:layout_gravity="center_horizontal|top"
+		/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="10dp"
+		android:id="@+id/name"
+		android:textStyle="bold"
+		android:textSize="15dp"
+		android:text="name"/>
+
+
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="10dp"
+		android:id="@+id/loc"
+		android:text="location"
+		android:layout_gravity="right|top"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="10dp"
+		android:id="@+id/restaurants"
+		android:text="restaurants"
+		android:layout_marginTop="25dp"
+		android:layout_gravity="left|top"/>
+
+	<TextView
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:text="Some description"
+		android:padding="15dp"
+		android:textSize="16dp"
+		android:textStyle="bold"
+		android:layout_gravity="center_horizontal|bottom"/>
+
+
+
+</FrameLayout>
