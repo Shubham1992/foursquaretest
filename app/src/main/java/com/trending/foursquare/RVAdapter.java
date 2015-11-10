@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.EventLogTags;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TrendViewHolder>{
 			tvDesc = (TextView) itemView.findViewById(R.id.description);
 			tvloc = (TextView) itemView.findViewById(R.id.loc);
 			imgmain = (ImageView) itemView.findViewById(R.id.imageViewmain);
+            frameLayout = (FrameLayout) itemView.findViewById(R.id.framemain);
 
         }
     }
@@ -78,24 +80,25 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TrendViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(final TrendViewHolder holder, int position) {
+    public void onBindViewHolder(final TrendViewHolder holder, final int position) {
 
         final String name = trendlist.get(position).get("name").toString();
         final String restaurant = trendlist.get(position).get("restaurant").toString();
-        final String id = trendlist.get(position).get("id").toString();
-        final String desc = trendlist.get(position).get("description").toString();
-        final String imgurl = trendlist.get(position).get("imgurl").toString();
+      //  final String id = trendlist.get(position).get("id").toString();
+      //  final String desc = trendlist.get(position).get("description").toString();
+       // final String imgurl = trendlist.get(position).get("imgurl").toString();
 		final String location = trendlist.get(position).get("location").toString();
+
 
 
 
 		holder.tvName.setText(name);
 		holder.tvRestaurant.setText(restaurant);
-		holder.tvDesc.setText(desc);
+		//holder.tvDesc.setText(desc);
 		holder.tvloc.setText(location);
 
 
-		if (imgurl != null)
+		/*if (imgurl != null)
 
 
         {
@@ -125,7 +128,18 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TrendViewHolder>{
             });
 
          //   makeImageRequest("http://www.feedboard.in/api/media/images/" + imgurl, holder.imgMain, holder.tempImg);
-        }
+        }*/
+
+        holder.frameLayout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(context , Description.class);
+                intent.putExtra("position",position);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

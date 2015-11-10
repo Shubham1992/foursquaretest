@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +27,7 @@ import com.trending.foursquare.app.AppController;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -47,17 +50,10 @@ public class MainActivity extends AppCompatActivity
 
 		search = (EditText) findViewById(R.id.search);
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-		buttonSearch = (Button) findViewById(R.id.btnsearch);
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});
+		LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
+
+		recyclerView.setLayoutManager(layoutManager);
+				buttonSearch = (Button) findViewById(R.id.btnsearch);
 
 		buttonSearch.setOnClickListener(new View.OnClickListener()
 		{
@@ -85,7 +81,9 @@ public class MainActivity extends AppCompatActivity
 					public void onResponse(JSONObject response) {
 						Log.e("TAG RESPONSE", response.toString());
 						JsonTOList jsonTOList = new JsonTOList();
-						jsonTOList.convertjsontolist(response);
+						List<HashMap<String , String>> l =jsonTOList.convertjsontolist(response);
+						RVAdapter rvAdapter = new RVAdapter(l , MainActivity.this);
+						recyclerView.setAdapter(rvAdapter);
 
 					}
 				}, new Response.ErrorListener() {

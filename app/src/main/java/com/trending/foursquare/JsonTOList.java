@@ -17,7 +17,9 @@ public class JsonTOList
 	List<HashMap<String, String>> convertjsontolist(JSONObject jsonObject)
 	{
 
-		JSONArray array = jsonObject.optJSONArray("venues");
+		JSONObject objectResponse = jsonObject.optJSONObject("response");
+		JSONArray array = objectResponse.optJSONArray("venues");
+
 		for (int i = 0; i < 20; i++)
 		{
 			JSONObject objectVenues = array.optJSONObject(i);
@@ -43,6 +45,8 @@ public class JsonTOList
 		}
 
 
+
+		SavedList.getInstance().setList(list);
 		return list;
 	}
 
