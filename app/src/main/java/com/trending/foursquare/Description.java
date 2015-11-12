@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +28,7 @@ public class Description extends Activity
 		super.onCreate(savedInstanceState);
  		setContentView(R.layout.description);
 		Intent intent = getIntent();
-		int pos = intent.getIntExtra("pos",0);
+		int pos = intent.getIntExtra("position",0);
 		tvName = (TextView) findViewById(R.id.name);
 		tvRestaurant = (TextView) findViewById(R.id.restaurants);
 		tvDesc = (TextView) findViewById(R.id.description);
@@ -42,6 +43,14 @@ public class Description extends Activity
 
 		tvName.setText(list.get(pos).get("name").toString());
 		tvloc.setText(list.get(pos).get("location").toString());
+
+
+		SqlExecutor sqlExecutor = new SqlExecutor(Description.this);
+		sqlExecutor.open();
+		Log.e("sql data", sqlExecutor.getData().toString());
+
+		sqlExecutor.close();
+
 
 
 	}

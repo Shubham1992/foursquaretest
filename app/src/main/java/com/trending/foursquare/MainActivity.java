@@ -23,6 +23,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.trending.foursquare.app.AppController;
+import com.trending.foursquare.utils.BeanClass;
 
 import org.json.JSONObject;
 
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity
 				if (search.getText() != null && search.getText().length()>0)
 				{
 					makeRequestJSON(search.getText().toString());
+					BeanClass.getInstance().setSearchTerm(search.getText().toString());
+
+
 				}
 			}
 		});
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 					@Override
 					public void onResponse(JSONObject response) {
 						Log.e("TAG RESPONSE", response.toString());
-						JsonTOList jsonTOList = new JsonTOList();
+						JsonTOList jsonTOList = new JsonTOList(MainActivity.this);
 						List<HashMap<String , String>> l =jsonTOList.convertjsontolist(response);
 						RVAdapter rvAdapter = new RVAdapter(l , MainActivity.this);
 						recyclerView.setAdapter(rvAdapter);
